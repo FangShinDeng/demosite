@@ -1,19 +1,11 @@
 from django.shortcuts import redirect, render
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
-from .forms import UserCreateForm
 from django.contrib.auth.decorators import login_required
-
-# Create your views here.
-# login/ [name='login']
-# logout/ [name='logout']
-# password_change/ [name='password_change']
-# password_change/done/ [name='password_change_done']
-# password_reset/ [name='password_reset']
-# password_reset/done/ [name='password_reset_done']
-# reset/<uidb64>/<token>/ [name='password_reset_confirm']
-# reset/done/ [name='password_reset_complete']
-
+from .forms import UserCreateForm
+from . import models
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 @login_required(login_url="login")
 def home(request):
@@ -43,6 +35,11 @@ def login_view(request):
 
         user = authenticate(request, username=username, password=password)
         if user is not None:
+            # if models.UserProfile.objects.get(user_id=request.user.id)
+                
+            if not user.userprofile.email_confirmed:
+                return redirect('not_email_verified')
+
             login(request, user)
             return redirect('home')
         else:
@@ -59,3 +56,7 @@ def logout_view(request):
 def email_verify(request):
     context = {}
     return render(request, "accounts/email_verify.html", context)
+
+def not_email_verified(request):
+    context = {}
+    return render(request, "accounts/not_email_verified.html", context)
