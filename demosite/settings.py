@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_extensions',
     'accounts',
 ]
 
@@ -132,3 +133,10 @@ EMAIL_HOST_PASSWORD = ""
 
 # DEFAULT LOGIN_URL
 LOGIN_URL = "login"
+
+
+# Django_extensions - Graph 
+GRAPH_MODELS = {
+  'all_applications': True,
+  'group_models': True,
+}

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        
+    </style>
+</head>
+<body>
+    {% autoescape off %}
+    <h3>Hi, {{username}}<h3>
+    thank you for register, please click below link to confirm your email address.<br>
+    http://{{domain}}{% url 'activate_user' uidb64=uid token=token %}
+
+    <hr width="50%">
+    <p>if you don't register our website, please don't click it and someone used your email.</p>
+    {% endautoescape %}
+</body>
+</html>

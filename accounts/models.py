@@ -17,6 +17,7 @@ class User(AbstractUser):
             'unique': _("A user with that username already exists."),
         },
     )
+    email = models.EmailField(_('email address'), unique=True)
 
     def __str__(self):
         return self.username
