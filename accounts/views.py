@@ -4,18 +4,15 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from .forms import UserCreateForm
 from .modules import send_activate_mail
-from django.contrib.sites.shortcuts import get_current_site
-from django.template.loader import render_to_string
-from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
-from django.utils.encoding import force_bytes, force_str, force_text, DjangoUnicodeDecodeError
+from django.utils.http import urlsafe_base64_decode
+from django.utils.encoding import force_text
 from .utils import token_generator
 from .models import User, UserProfile
-
 
 @login_required(login_url="login")
 def home(request):
     context = {}
-    return render(request, "accounts/dashboard.html", context)
+    return render(request, "accounts/index.html", context)
 
 def register(request):
     form = UserCreateForm()
