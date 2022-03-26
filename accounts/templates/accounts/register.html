@@ -1,63 +1,130 @@
 {% extends 'base.html' %}
-
-    {% block head %}    
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-        <title>Register - SB Admin</title>
-    {% endblock %}
-
-    {% block content %}
-    <body class="bg-primary">
-        <div id="layoutAuthentication">
-            <div id="layoutAuthentication_content">
-                <main>
-                    <div class="container">
-                        <div class="row justify-content-center">
-                            <div class="col-lg-7">
-                                <div class="card shadow-lg border-0 rounded-lg mt-5">
-                                    <div class="card-header"><h3 class="text-center font-weight-light my-4">Create Account</h3></div>
-                                    <div class="card-body">
-                                        <form method="POST" action="">
-                                            {% csrf_token %}
-                                            <div class="form-floating mb-3">
-                                                {{form.username}}
-                                                <label for="username">Username</label>
-                                            </div>
-                                            <div class="form-floating mb-3">
-                                                {{form.email}}
-                                                <label for="email">Email address</label>
-                                            </div>
-                                            <div class="row mb-3">
-                                                <div class="col-md-6">
-                                                    <div class="form-floating mb-3 mb-md-0">
-                                                        {{form.password1}}
-                                                        <label for="password1">Password</label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-floating mb-3 mb-md-0">
-                                                        {{form.password2}}
-                                                        <label for="password2">Confirm Password</label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="mt-4 mb-0">
-                                                <div class="d-grid"><input type="submit" class="btn btn-primary btn-block" value="Create Account"></a></div>
-                                            </div>
-                                        </form>
-                                    </div>
-
-                                    {{form.errors}}
-
-                                    <div class="card-footer text-center py-3">
-                                        <div class="small"><a href="{% url 'login' %}">Have an account? Go to login</a></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </main>
-            </div>
+  {% load static %}
+  {% block head %}
+    <title>Sign up</title>
+    <script src="{% static './dist/js/tabler.min.js' %}"></script>
+    <script src="{% static './dist/js/demo.min.js' %}"></script>
+  {% endblock %}
+  {% block content %}
+    <body  class=" border-top-wide border-primary d-flex flex-column">
+    <div class="page page-center">
+      <div class="container-tight py-4">
+        <div class="text-center mb-4">
+          <a href="." class="navbar-brand navbar-brand-autodark"><img src="{% static './static/logo.svg' %}" height="36" alt=""></a>
         </div>
-    </body>
-    {% endblock %}
+        <form class="card card-md" action="" method="POST" id="register-form">
+          {% csrf_token %}
+          <div class="card-body">
+            <h2 class="card-title text-center mb-4">Create new account</h2>
+            {% if form.errors %}
+            <div class="alert alert-warning" role="alert">
+              <h4 class="alert-title">{{form.errors}}</h4>
+            </div>
+            {% endif %}
+            <div class="mb-3">
+              <label class="form-label">Name</label>
+              <input type="text" name="username" class="form-control" placeholder="Enter name">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Email address</label>
+              <input type="email" name="email" class="form-control" placeholder="Enter email">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Password</label>
+              <div class="input-group input-group-flat">
+                <input type="password" name="password1" id="password1" class="form-control" placeholder="Password"  autocomplete="off">
+                <span class="input-group-text">
+                  <a id="togglePassword1" href="#" class="link-secondary" title="Show password" data-bs-toggle="tooltip"><!-- Download SVG icon from http://tabler-icons.io/i/eye -->
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><circle cx="12" cy="12" r="2" /><path d="M22 12c-2.667 4.667 -6 7 -10 7s-7.333 -2.333 -10 -7c2.667 -4.667 6 -7 10 -7s7.333 2.333 10 7" /></svg>
+                  </a>
+                </span>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Confirm Password</label>
+              <div class="input-group input-group-flat">
+                <input type="password" name="password2" id="password2" class="form-control" placeholder="Password"  autocomplete="off">
+                <span class="input-group-text">
+                  <a id="togglePassword2" href="#" class="link-secondary" title="Show password" data-bs-toggle="tooltip"><!-- Download SVG icon from http://tabler-icons.io/i/eye -->
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><circle cx="12" cy="12" r="2" /><path d="M22 12c-2.667 4.667 -6 7 -10 7s-7.333 -2.333 -10 -7c2.667 -4.667 6 -7 10 -7s7.333 2.333 10 7" /></svg>
+                  </a>
+                </span>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label class="form-check">
+                <input id="terms_of_service" type="checkbox" class="form-check-input"/>
+                <span class="form-check-label">Agree the <a href="{% url 'terms_of_service' %}" tabindex="-1">terms and policy</a>.</span>
+              </label>
+            </div>
+            <div class="form-footer">
+              <button id="register" type="submit" class="btn btn-primary w-100">Create new account</button>
+            </div>
+            <!-- trigger modal button -->
+            <button id="modal-trigger-button" hidden="true" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#Modal"></button>
+          </div>
+        </form>
+
+        <div class="text-center text-muted mt-3">
+          Already have account? <a href="{% url 'login' %}" tabindex="-1">Sign in</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal pop up -->
+    <div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Alert</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            Please confirm and agree our terms and policy.
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary me-auto" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>    
+    <!-- Libs JS -->
+    <!-- Tabler Core -->
+    <script>
+      // show hide password
+      const togglePassword1 = document.querySelector("#togglePassword1");
+      const password1 = document.querySelector("#password1");
+      togglePassword1.addEventListener("click", function () {
+        // toggle the type attribute
+        const type = password1.getAttribute("type") === "password" ? "text" : "password";
+        password1.setAttribute("type", type);
+        
+        // toggle the icon
+        this.classList.toggle("bi-eye");
+      });
+
+      // show hide confirm password
+      const togglePassword2 = document.querySelector("#togglePassword2");
+      const password2 = document.querySelector("#password2");
+      togglePassword2.addEventListener("click", function () {
+        // toggle the type attribute
+        const type = password2.getAttribute("type") === "password" ? "text" : "password";
+        password2.setAttribute("type", type);
+        
+        // toggle the icon
+        this.classList.toggle("bi-eye");
+      });
+
+      // if didn't confirm terms_of_service, show alert
+      const registerForm = document.querySelector("#register-form");
+      registerForm.addEventListener("submit", function (evt) {
+        let terms_of_service = document.querySelector("#terms_of_service");
+        if (!terms_of_service.checked){
+          evt.preventDefault();
+          // let modal = document.querySelector("#Modal");
+          document.getElementById("modal-trigger-button").click();
+        }
+      })
+      
+    </script>
+  {% endblock %}

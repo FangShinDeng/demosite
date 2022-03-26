@@ -42,7 +42,7 @@ def send_activate_mail(request, user) -> None:
     custom_send_mail(
         subject="Register Success Inform", 
         receivers=[user.email],
-        html_template="accounts/email_activate.html",
+        html_template="emails/email_activate.html",
         context=context
         )
     

@@ -27,6 +27,10 @@ def register(request):
 
             messages.success(request, 'Account created for user: ' + username)
             return redirect('login')
+        else:
+            for error in form.error_messages:
+                print(error)
+                print(form.error_messages[error])
     context = {'form': form}
     return render(request, "accounts/register.html", context)
 
@@ -80,3 +84,6 @@ def activate_user(request, uidb64, token):
 
     context = {}
     return render(request, 'accounts/activate_user_failed.html', context)
+
+def terms_of_service(request):
+    return render(request, 'accounts/terms-of-service.html')
