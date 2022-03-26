@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+    {% load static %}
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <!-- <meta name="description" content="" />
+        <meta name="author" content="" /> -->
+        {% block head %}
+        {% endblock %}
+        <link href="{% static './dist/css/tabler.min.css' %}" rel="stylesheet"/>
+        <link href="{% static './dist/css/tabler-flags.min.css' %}" rel="stylesheet"/>
+        <link href="{% static './dist/css/tabler-payments.min.css' %}" rel="stylesheet"/>
+        <link href="{% static './dist/css/tabler-vendors.min.css' %}" rel="stylesheet"/>
+        <link href="{% static './dist/css/demo.min.css' %}" rel="stylesheet"/>
+
+        <!-- Libs JS -->
+        <script src="{% static './dist/libs/apexcharts/dist/apexcharts.min.js' %}"></script>
+        <!-- Tabler Core -->
+        <script src="{% static './dist/js/tabler.min.js' %}"></script>
+        <script src="{% static './dist/js/demo.min.js' %}"></script>
+    </head>
+    <body>
+        <div class = "wrapper">
+            {% include 'accounts/sidebar.html' %}
+            {% include 'accounts/header.html' %}
+            {% block content %}
+            {% endblock %}
+        </div>
+    </body>
+    </html>

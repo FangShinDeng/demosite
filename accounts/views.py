@@ -2,6 +2,7 @@ from django.shortcuts import redirect, render
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from . import decarators
 from .forms import UserCreateForm
 from .modules import send_activate_mail
 from django.utils.http import urlsafe_base64_decode
@@ -11,6 +12,7 @@ from .models import User, UserProfile
 
 @login_required(login_url="login")
 def home(request):
+    # print(request.user.userprofile.email_confirmed)
     context = {}
     return render(request, "accounts/index.html", context)
 
@@ -27,10 +29,7 @@ def register(request):
 
             messages.success(request, 'Account created for user: ' + username)
             return redirect('login')
-        else:
-            for error in form.error_messages:
-                print(error)
-                print(form.error_messages[error])
+
     context = {'form': form}
     return render(request, "accounts/register.html", context)
 
@@ -80,10 +79,16 @@ def activate_user(request, uidb64, token):
         profile.save()
 
         messages.success(request, 'Email success activate')
-        return redirect('login')
+        login(request, user)
+        return redirect('home')
 
     context = {}
     return render(request, 'accounts/activate_user_failed.html', context)
 
 def terms_of_service(request):
     return render(request, 'accounts/terms-of-service.html')
+
+@login_required(login_url="login")
+def permissions_management(request):
+    context = {}
+    return render(request, 'accounts/permissions_management.html', context)

@@ -60,8 +60,6 @@
             <div class="form-footer">
               <button id="register" type="submit" class="btn btn-primary w-100">Create new account</button>
             </div>
-            <!-- trigger modal button -->
-            <button id="modal-trigger-button" hidden="true" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#Modal"></button>
           </div>
         </form>
 
@@ -115,6 +113,7 @@
         this.classList.toggle("bi-eye");
       });
 
+
       // if didn't confirm terms_of_service, show alert
       const registerForm = document.querySelector("#register-form");
       registerForm.addEventListener("submit", function (evt) {
@@ -122,9 +121,13 @@
         if (!terms_of_service.checked){
           evt.preventDefault();
           // let modal = document.querySelector("#Modal");
-          document.getElementById("modal-trigger-button").click();
+          let Modal = new bootstrap.Modal(document.getElementById('Modal'), {
+            keyboard: false
+          });
+          Modal.show();
         }
-      })
-      
+      });
+
     </script>
   {% endblock %}
+  
