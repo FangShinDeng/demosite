@@ -92,3 +92,7 @@ def terms_of_service(request):
 def permissions_management(request):
     context = {}
     return render(request, 'accounts/permissions_management.html', context)
+
+def user_profile(request):
+    context = {}
+    return render(request, 'accounts/user_profile.html', context)

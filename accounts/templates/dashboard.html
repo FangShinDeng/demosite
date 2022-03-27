@@ -1,32 +1,101 @@
 <!DOCTYPE html>
 <html lang="en">
-    {% load static %}
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <!-- <meta name="description" content="" />
-        <meta name="author" content="" /> -->
-        {% block head %}
-        {% endblock %}
-        <link href="{% static './dist/css/tabler.min.css' %}" rel="stylesheet"/>
-        <link href="{% static './dist/css/tabler-flags.min.css' %}" rel="stylesheet"/>
-        <link href="{% static './dist/css/tabler-payments.min.css' %}" rel="stylesheet"/>
-        <link href="{% static './dist/css/tabler-vendors.min.css' %}" rel="stylesheet"/>
-        <link href="{% static './dist/css/demo.min.css' %}" rel="stylesheet"/>
+{% load static %}
 
-        <!-- Libs JS -->
-        <script src="{% static './dist/libs/apexcharts/dist/apexcharts.min.js' %}"></script>
-        <!-- Tabler Core -->
-        <script src="{% static './dist/js/tabler.min.js' %}"></script>
-        <script src="{% static './dist/js/demo.min.js' %}"></script>
-    </head>
-    <body>
-        <div class = "wrapper">
-            {% include 'accounts/sidebar.html' %}
-            {% include 'accounts/header.html' %}
-            {% block content %}
-            {% endblock %}
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <!-- <meta name="description" content="" />
+        <meta name="author" content="" /> -->
+    {% block head %}
+    {% endblock %}
+    <link href="{% static './dist/css/tabler.min.css' %}" rel="stylesheet" />
+    <link href="{% static './dist/css/tabler-flags.min.css' %}" rel="stylesheet" />
+    <link href="{% static './dist/css/tabler-payments.min.css' %}" rel="stylesheet" />
+    <link href="{% static './dist/css/tabler-vendors.min.css' %}" rel="stylesheet" />
+    <link href="{% static './dist/css/demo.min.css' %}" rel="stylesheet" />
+
+    <!-- Libs JS -->
+    <script src="{% static './dist/libs/apexcharts/dist/apexcharts.min.js' %}"></script>
+    <!-- Tabler Core -->
+    <script src="{% static './dist/js/tabler.min.js' %}"></script>
+    <script src="{% static './dist/js/demo.min.js' %}"></script>
+</head>
+
+<body>
+    <div class="wrapper">
+        {% include 'accounts/sidebar.html' %}
+        {% include 'accounts/header.html' %}
+
+        <!-- all -->
+        <div class="page-wrapper">
+            <!--  page header -->
+            <div class="container-xl">
+                <!-- Page title -->
+                <div class="page-header d-print-none">
+                    <div class="row align-items-center">
+                        <div class="col">
+                            <!-- Page pre-title -->
+                            <div class="page-pretitle">
+                                {% block page-header-subtitle %}
+                                <!-- Overview -->
+                                {% endblock %}
+                            </div>
+                            <h2 class="page-title">
+                                {% block page-header-title %}
+                                <!-- Combo layout -->
+                                {% endblock %}
+                            </h2>
+                        </div>
+                        
+                        <!-- page header action button -->
+                        <div class="col-12 col-md-auto ms-auto d-print-none">
+                            <div class="btn-list">
+                                <span class="d-none d-sm-inline">
+                                    <a href="#" class="btn btn-white">
+                                        New view
+                                    </a>
+                                </span>
+                                <a href="#" class="btn btn-primary d-none d-sm-inline-block" data-bs-toggle="modal"
+                                    data-bs-target="#modal-report">
+                                    <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
+                                        viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                                        stroke-linecap="round" stroke-linejoin="round">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                        <line x1="12" y1="5" x2="12" y2="19"></line>
+                                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                                    </svg>
+                                    Create new report
+                                </a>
+                                <a href="#" class="btn btn-primary d-sm-none btn-icon" data-bs-toggle="modal"
+                                    data-bs-target="#modal-report" aria-label="Create new report">
+                                    <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
+                                        viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                                        stroke-linecap="round" stroke-linejoin="round">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                        <line x1="12" y1="5" x2="12" y2="19"></line>
+                                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--  page body -->
+            <div class="page-body">
+                <div class="container-xl">
+                    {% block content %}
+                    {% endblock %}
+                </div>
+            </div>
+            {% include 'accounts/footer.html' %}
         </div>
-    </body>
-    </html>
+
+    </div>
+</body>
+
+</html>
